@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+</body>
+<table class="table">
+    <tr class="table__header">
+        <th class="table__cell">{{ header }}</th>
+    </tr>
+    {% for row in data %}
+    <tr class="table__row" id="{{row}}">
+        <td class="table_cell">{{row}}</td>
+        <td class="table_cell"><a href="/deleteAutor/{{row.replace(" ","_")}}" class="btn btn-danger btn-sn">Delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+</html>
