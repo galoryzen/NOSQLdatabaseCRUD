@@ -1,0 +1,120 @@
+use biblioteca
+db.dropDatabase()
+
+// colección (tabla) libro
+db.departamento.drop()
+db.createCollection("libro")
+// colección (tabla) autor
+db.persona.drop()
+db.createCollection("autor")
+// colección (tabla) autorea
+db.profesor.drop()
+db.createCollection("autorea")
+// colección (tabla) edicion
+db.grado.drop()
+db.createCollection("edicion")
+// colección (tabla) copia
+db.asignatura.drop()
+db.createCollection("copia")
+// colección (tabla) prestamo
+db.curso_escolar.drop()
+db.createCollection("prestamo")
+// colección (tabla) usuario
+db.alumno_se_matricula_asignatura.drop()
+db.createCollection("usuario")
+
+// insertando documentos (registros) en la colección (tabla) libro
+db.libro.insert({"titulo":'Xavi, el dueño del balón'})
+db.libro.insert({"titulo":'El Barca de Xavi. Una filosofía de juego connatural'})
+db.libro.insert({"titulo":'Mi turno: La autobiografía de Johan Cruyff'})
+db.libro.insert({"titulo":'Maradona. Érase una vez en Europa'})
+db.libro.insert({"titulo":'Todo Messi'})
+db.libro.insert({"titulo":'The Barcelona legacy'})
+db.libro.insert({"titulo":'Soy Zlatan Ibrahimovic'})
+db.libro.insert({"titulo":'Pep Guardiola. La Biografía'})
+db.libro.insert({"titulo":'PEP: BAÑO TÁCTICO'})
+db.libro.insert({"titulo":'Pep Guardiola: The Evolution'})
+
+// insertando documentos (registros) en la colección (tabla) autor
+db.autor.insert({"nombre":'David Lagercrantz'})
+db.autor.insert({"nombre":'Guillem Balague'})
+db.autor.insert({"nombre":'Johan Cruyff'})
+db.autor.insert({"nombre":'Albert Ballesteros'})
+db.autor.insert({"nombre":'Jhon Ludden'})
+db.autor.insert({"nombre":'Sebastian González'})
+db.autor.insert({"nombre":'Raúl López'})
+db.autor.insert({"nombre":'Jhon Hardware'})
+db.autor.insert({"nombre":'Loren Morón'})
+db.autor.insert({"nombre":'Pep Guardiola'})
+
+// insertando documentos (registros) en la colección (tabla) autorea
+db.autorea.insert({"titulo":'Xavi, el dueño del balón',"nombre":'David Lagercrantz'})
+db.autorea.insert({"titulo":'El Barca de Xavi. Una filosofía de juego connatural',"nombre":'Guillem Balague'})
+db.autorea.insert({"titulo":'Mi turno: La autobiografía de Johan Cruyff',"nombre":'Johan Cruyff'})
+db.autorea.insert({"titulo":'Maradona. Érase una vez en Europa',"nombre":'Albert Ballesteros'})
+db.autorea.insert({"titulo":'Todo Messi',"nombre":'Jhon Ludden'})
+db.autorea.insert({"titulo":'The Barcelona legacy',"nombre":'Sebastian González'})
+db.autorea.insert({"titulo":'Soy Zlatan Ibrahimovic',"nombre":'Raúl López'})
+db.autorea.insert({"titulo":'Pep Guardiola. La Biografía',"nombre":'Jhon Hardware'})
+db.autorea.insert({"titulo":'PEP: BAÑO TÁCTICO',"nombre":'Loren Morón'})
+db.autorea.insert({"titulo":'Pep Guardiola: The Evolution',"nombre":'Pep Guardiola'})
+
+// insertando documentos (registros) en la colección (tabla) edicion
+db.edicion.insert({"isbn":9781234567897, "año":2019,"idioma":'Español',"titulo":'Xavi, el dueño del balón'})
+db.edicion.insert({"isbn":9878734767892, "año":2015,"idioma":'Español',"titulo":'El Barca de Xavi. Una filosofía de juego connatural'})
+db.edicion.insert({"isbn":8749875432684, "año":2010,"idioma":'Inglés',"titulo":'Mi turno: La autobiografía de Johan Cruyff'})
+db.edicion.insert({"isbn":7949432164935, "año":2020,"idioma":'Español',"titulo":'Maradona. Érase una vez en Europa'})
+db.edicion.insert({"isbn":6548744321354, "año":2019,"idioma":'Español',"titulo":'Todo Messi'})
+db.edicion.insert({"isbn":3654879874213, "año":2015,"idioma":'Inglés',"titulo":'The Barcelona legacy'})
+db.edicion.insert({"isbn":9125249835649, "año":2017,"idioma":'Sueco',"titulo":'Soy Zlatan Ibrahimovic'})
+db.edicion.insert({"isbn":9324549898971, "año":2021,"idioma":'Español',"titulo":'Pep Guardiola. La Biografía'})
+db.edicion.insert({"isbn":2659489746546, "año":2020,"idioma":'Español',"titulo":'PEP: BAÑO TÁCTICO'})
+db.edicion.insert({"isbn":3548796214364, "año":2016,"idioma":'Inglés',"titulo":'Pep Guardiola: The Evolution'})
+
+// insertando documentos (registros) en la colección (tabla) copia
+db.copia.insert({"isbn":9781234567897,"numero":1})
+db.copia.insert({"isbn":9878734767892,"numero":155})
+db.copia.insert({"isbn":8749875432684,"numero":53})
+db.copia.insert({"isbn":7949432164935,"numero":634})
+db.copia.insert({"isbn":6548744321354,"numero":37})
+db.copia.insert({"isbn":3654879874213,"numero":14})
+db.copia.insert({"isbn":9125249835649,"numero":874})
+db.copia.insert({"isbn":9324549898971,"numero":69})
+db.copia.insert({"isbn":2659489746546,"numero":48})
+db.copia.insert({"isbn":3548796214364,"numero":364})
+
+// insertando documentos (registros) en la colección (tabla) prestamo
+db.prestamo.insert({"isbn":9781234567897,"numero":1,"rut":1654648,"fecha_prestamo":new Date("2019, 10, 21"),"fecha_devolucion":new Date("2019, 10, 31")})
+db.prestamo.insert({"isbn":9878734767892,"numero":155,"rut":1654648,"fecha_prestamo":new Date("2019, 10, 21"),"fecha_devolucion":new Date("2019, 10, 31")})
+db.prestamo.insert({"isbn":8749875432684,"numero":53,"rut":1654648,"fecha_prestamo":new Date("2019, 10, 21"),"fecha_devolucion":new Date("2019, 10, 31")})
+db.prestamo.insert({"isbn":7949432164935,"numero":634,"rut":1654648,"fecha_prestamo":new Date("2019, 10, 21"),"fecha_devolucion":new Date("2019, 10, 31")})
+db.prestamo.insert({"isbn":6548744321354,"numero":37,"rut":1654648,"fecha_prestamo":new Date("2019, 10, 21"),"fecha_devolucion":new Date("2019, 10, 31")})
+db.prestamo.insert({"isbn":3654879874213,"numero":14,"rut":1654648,"fecha_prestamo":new Date("2019, 10, 21"),"fecha_devolucion":new Date("2019, 10, 31")})
+db.prestamo.insert({"isbn":9125249835649,"numero":874,"rut":1654648,"fecha_prestamo":new Date("2019, 11, 1"),"fecha_devolucion":new Date("2019, 11, 20")})
+db.prestamo.insert({"isbn":9324549898971,"numero":69,"rut":1654648,"fecha_prestamo":new Date("2019, 11, 1"),"fecha_devolucion":new Date("2019, 11, 20")})
+db.prestamo.insert({"isbn":2659489746546,"numero":48,"rut":1654648,"fecha_prestamo":new Date("2019, 11, 1"),"fecha_devolucion":new Date("2019, 11, 20")})
+db.prestamo.insert({"isbn":3548796214364,"numero":364,"rut":1654648,"fecha_prestamo":new Date("2019, 11, 1"),"fecha_devolucion":new Date("2019, 11, 20")})
+
+db.prestamo.insert({"isbn":9781234567897,"numero":1,"rut":1879455,"fecha_prestamo":new Date("2019, 11, 1"),"fecha_devolucion":new Date("2019, 11, 21")})
+db.prestamo.insert({"isbn":9878734767892,"numero":155,"rut":1316849,"fecha_prestamo":new Date("2019, 11, 1"),"fecha_devolucion":new Date("2019, 11, 22")})
+db.prestamo.insert({"isbn":8749875432684,"numero":53,"rut":1456987,"fecha_prestamo":new Date("2019, 11, 2"),"fecha_devolucion":new Date("2019, 12, 9")})
+db.prestamo.insert({"isbn":7949432164935,"numero":634,"rut":1654789,"fecha_prestamo":new Date("2019, 11, 6"),"fecha_devolucion":new Date("2019, 12, 15")})
+db.prestamo.insert({"isbn":6548744321354,"numero":37,"rut":1123654,"fecha_prestamo":new Date("2019, 11, 7"),"fecha_devolucion":new Date("2019, 12, 29")})
+db.prestamo.insert({"isbn":3654879874213,"numero":14,"rut":1321456,"fecha_prestamo":new Date("2020, 11, 20"),"fecha_devolucion":new Date("2020, 1, 10")})
+db.prestamo.insert({"isbn":9125249835649,"numero":874,"rut":1654123,"fecha_prestamo":new Date("2020, 11, 27"),"fecha_devolucion":new Date("2020, 1, 20")})
+db.prestamo.insert({"isbn":9324549898971,"numero":69,"rut":1564943,"fecha_prestamo":new Date("2020, 12, 16"),"fecha_devolucion":new Date("2020, 1, 23")})
+db.prestamo.insert({"isbn":2659489746546,"numero":48,"rut":1369852,"fecha_prestamo":new Date("2020, 12, 19"),"fecha_devolucion":new Date("2020, 1, 24")})
+db.prestamo.insert({"isbn":3548796214364,"numero":364,"rut":1258963,"fecha_prestamo":new Date("2020, 1, 20"),"fecha_devolucion":new Date("2020, 1, 29")})
+
+// insertando documentos (registros) en la colección (tabla) usuario
+db.usuario.insert({"rut":1654648, "nombre":'Cristiano Ronaldo'})
+db.usuario.insert({"rut":1879455, "nombre":'Isaac Blanco'})
+db.usuario.insert({"rut":1316849, "nombre":'Germán Vargas'})
+db.usuario.insert({"rut":1456987, "nombre":'Antoine Griezmann'})
+db.usuario.insert({"rut":1654789, "nombre":'Ousmane Dembelé'})
+db.usuario.insert({"rut":1123654, "nombre":'Luis Suárez'})
+db.usuario.insert({"rut":1321456, "nombre":'Joan Laporta'})
+db.usuario.insert({"rut":1654123, "nombre":'Teófilo Gutíerrez'})
+db.usuario.insert({"rut":1564943, "nombre":'Thiago Silva'})
+db.usuario.insert({"rut":1369852, "nombre":'Rodri Hernández'})
+db.usuario.insert({"rut":1258963, "nombre":'Vincent Kompany'})
