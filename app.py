@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 from flask import Flask, render_template, request, redirect, url_for, flash
+from bson.objectid import ObjectId
 app = Flask(__name__)
 
 
@@ -15,30 +16,87 @@ def index():
     data = {autor['nombre']: autor['_id'] for autor in results}
     return render_template("index.html", data=data)
 
+@app.route('/createAutor', methods=['POST'])
+def create_autor():
+    collection = db['autor']
+
+    nombre_padre = request.form['nombre']
+    try:
+        collection.insert_one({"nombre": nombre_padre})
+    except Exception:
+        print(Exception)
+    finally:
+        return redirect(url_for('index'))
+    
+    
+@app.route('/deleteAutor/<id>')
+def delete_autor(id):
+    collection = db['autor']
+    
+    try:
+        collection.delete_one({'_id': ObjectId(id)})
+    except Exception:
+        print(Exception)
+    finally:
+        return redirect(url_for('index'))
+    
+@app.route('/updateAutor', methods=['POST'])
+def update_autor():
+    collection = db['autor']
+    nombre_autor_nuevo = request.form['nombre']
+    id_autor = request.form['id']
+    
+    nombre_autor_viejo = collection.find({'_id': ObjectId(id_autor)})['nombre']
+
+    try:
+        collection.update_one({'_id': ObjectId(id_autor)}, {'$set': {'nombre': nombre_autor_nuevo}})
+        collection2 = db['autorea']
+        collection2.update_many({'nombre': nombre_autor_viejo}, {'$set': {'nombre': nombre_autor_nuevo}})
+    except Exception:
+        print(Exception)
+    finally:
+        return redirect(url_for('index'))
+
 @app.route('/libro')
 def libro():
-
-    return render_template("libro.html")
+    collection = db['libro']
+    results = list(collection.find())
+    data = {libro['titulo']: libro['_id'] for libro in results}
+    return render_template("libro.html", data=data)
 
 @app.route('/edicion')
 def edicion():
-
+    collection = db['edicion']
+    results = list(collection.find())
+    for edicion in results:
+       data = data.append([edicion['_id'],edicion['isbn'],edicion['aÃ±o'],edicion['idioma'],edicion['titulo']])
+    return render_template("edicion.html", data=data)
     return render_template("edicion.html")
 
 @app.route('/copia')
 def copia():
-
-    return render_template("copia.html")
+    collection = db['copia']
+    results = list(collection.find())
+    for copia in results:
+     data = data.append([copia['_id'],copia['isbn'],copia['numero']])
+    return render_template("copia.html", data=data)
 
 @app.route('/usuario')
 def usuario():
-
-    return render_template("usuario.html")
+    collection = db['usuario']
+    results = list(collection.find())
+    data = []
+    for result in results:
+        data.append((result['_id'], result['rut'], result['nombre']))
+    return render_template("usuario.html", data=data)
 
 @app.route('/prestamo')
 def prestamo():
-
-    return render_template("prestamo.html")
+    collection = db['prestamo']
+    results = list(collection.find())
+    for prestamo in results:
+     data = data.append([prestamo['_id'],prestamo['isbn'],prestamo['numero'],prestamo['rut'],prestamo['fecha_prestamo'],prestamo['fecha_devolucion']])
+    return render_template("prestamo.html", data=data)
 
 @app.route('/consultaL')
 def consultaL():

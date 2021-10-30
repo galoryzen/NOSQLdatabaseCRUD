@@ -55,16 +55,16 @@
     <table id="autores">
         <tr>
           <th>Titulo</th>
+          <th>id oculto</th>
         </tr>
+        {% for name,id in data.items() %}
         <tr>
-          <td>Ready Player One</td>
-          <td class="btn_delete">eliminar</td>
+          <td>{{name}}</td>
+            <td><{{id}}</td>
+            <td class="btn_delete"><a href="/deleteAutor/{{id}}">eliminar</a></td>
         </tr>
-        <tr>
-            <td>El Principito</td>
-            <td class="btn_delete">eliminar</td>
-          </tr>
-      </table>
+        {% endfor %}
+    </table>
       
 </body>
 

@@ -48,18 +48,20 @@
                 <input type="text" id="nombre" name="nombre" required="true"/>
             </div>
             <div class="elemento">
-                <input type="submit" value="Agregar"/>
+                <input type="submit" value="Agregar" formaction="createAutor"/>
             </div>
         </form>
     </div>
     <table id="autores">
         <tr>
           <th>Nombre</th>
+          <th>id oculto</th>
         </tr>
         {% for name,id in data.items() %}
         <tr>
             <td>{{name}}</td>
-            <td class="btn_delete" href="/deleteAutor/{{id}}">eliminar</td>
+            <td><{{id}}</td>
+            <td class="btn_delete"><a href="/deleteAutor/{{id}}">eliminar</a></td>
         </tr>
         {% endfor %}
       </table>
