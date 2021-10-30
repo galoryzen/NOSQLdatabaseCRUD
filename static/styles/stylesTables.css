@@ -1,0 +1,219 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: helvetica Neue;
+    font-weight: lighter;
+  }
+  
+  html, body {
+    height: 100%;
+    background-color: #F7F6F3;
+  }
+  
+  nav {
+    width: 250px;
+    position: fixed;
+    width: 250px;
+    height: 100%;
+    background-color: #000814;
+    box-shadow: 5px 7px 10px rgb(0,0,0,.5);
+  }
+  
+  p.bib{
+    position: relative;
+    text-align: center;
+    font-size: 48px;
+    padding: 16px;
+    padding-right: 25px;
+    color: #F7F6F3;
+  }
+  
+  nav ul{
+    position: relative;
+    list-style-type: none;
+  }
+  
+  nav ul li a {
+    display: flex;
+    align-items: center;
+    font-family: arial;
+    font-size: 1.15em;
+    text-decoration: none;
+    text-transform: capitalize;
+    color: #fff;
+    padding: 10px 30px;
+    height: 50px;
+    transition: .5s ease;
+    
+  
+  }
+  
+  nav ul li a:hover {
+    height: 50px;
+    width: 0px;
+    color: #ffff;
+  }
+  
+  
+  div.barra{
+    position: absolute;
+    height: 50px;
+    width: 0px;
+    background-color: #001D3D;
+    opacity: .4;
+    -webkit-transition: width .5s;
+  }
+  
+  li:hover div.barra{
+    width: 250px;
+  }
+  
+  nav ul ul{
+    position: absolute;
+    left: 250px;
+    width: 200px;
+    top:0;
+    display: none;
+    background: #FFC300;
+    border-radius: 5px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,.1);
+    
+  }
+  
+  nav ul span {
+    position: absolute;
+    right: 20px;
+    font-size: 1.5em;
+  }
+  
+  nav ul .menu {
+    position: relative;
+    padding: 0px;
+    padding-right: 25px;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 1.2em;
+    cursor: pointer;
+    text-decoration: none;
+    transition: .5s ease;
+  }
+  
+  nav ul .menu:hover ul {
+    display: initial;
+  }
+  
+  /*Formulario*/
+  .contenedor{
+    margin: 0px 355px auto;
+    width: 1420px;
+    padding: 30px;
+  }
+  
+  .contenedor h2{
+    margin: 0 0 30px;
+    padding: 0;
+    font-size: 30px;
+    color: #003566;
+    text-align: center;
+    font-family: 'Varela Round', sans-serif;
+    font-weight: bold;
+  }
+  
+  .contenedor .elemento label{
+    color: #003566;
+    font-size: 24px;
+    font-family: 'Roboto Condensed', sans-serif;
+  }
+  
+  .contenedor .elemento input{
+    color: #003566;
+    padding: 10px 0;
+    width: 100%;
+    background: rgba(0,0,0,.05);
+    border: none;
+    border-bottom: 1px solid #FFC300;
+    margin-bottom: 30px;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 18px;
+  }
+  
+  .contenedor .elemento input[type="submit"]{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #FFC300;
+    border: none;
+    border-radius: 5px;
+    width: 15%;
+    letter-spacing: 2px;
+    cursor: pointer;
+    padding: 10px;
+    text-transform: uppercase;
+    margin-top: 30px;
+    font-weight: bold;
+  }
+
+  .contenedor .elemento input[type="update"]{
+    display: block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #3ee082;
+    border: none;
+    border-radius: 5px;
+    width: 15%;
+    letter-spacing: 2px;
+    cursor: pointer;
+    padding: 10px;
+    text-transform: uppercase;
+    margin-top: 30px;
+    font-weight: bold;
+  }
+  
+  /*Tabla*/
+  #autores {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    border-collapse: collapse;
+    margin: 0px 355px auto;
+    width: 1420px;
+    padding: 30px;
+  }
+  
+  #autores td, #autores th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    margin: 0px 355px auto;
+    width: 1420px;
+    padding: 30px;
+  }
+  
+  #autores tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #autores tr:hover {background-color: #ddd;}
+  
+  #autores th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #003566;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  td.btn_delete{
+    background-color: #ad0b06;
+    text-align: center;
+    border: none;
+    width: 15%;
+    letter-spacing: 2px;
+    cursor: pointer;
+    padding: 10px;
+    text-transform: capitalize;
+    color: white;
+    font-size: 18px;
+    margin-top: 30px;
+    font-weight: bold;
+  }

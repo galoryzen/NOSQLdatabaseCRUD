@@ -12,9 +12,62 @@ db = client['biblioteca']
 def index():
     collection = db['autor']
     results = list(collection.find())
-    data = [autor['nombre'] for autor in results]
-    headings='nombre'
-    return render_template("index.html", headings=headings, data=data)
+    data = {autor['nombre']: autor['_id'] for autor in results}
+    return render_template("index.html", data=data)
+
+@app.route('/libro')
+def libro():
+
+    return render_template("libro.html")
+
+@app.route('/edicion')
+def edicion():
+
+    return render_template("edicion.html")
+
+@app.route('/copia')
+def copia():
+
+    return render_template("copia.html")
+
+@app.route('/usuario')
+def usuario():
+
+    return render_template("usuario.html")
+
+@app.route('/prestamo')
+def prestamo():
+
+    return render_template("prestamo.html")
+
+@app.route('/consultaL')
+def consultaL():
+
+    return render_template("consultaL.html")
+
+@app.route('/consultaU')
+def consultaU():
+
+    return render_template("consultaU.html")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #Consulta1
 """

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static',filename='styles/stylesTables.css') }}" rel="stylesheet">
+    <title>Biblioteca</title>
+</head>
+
+<body>
+    <nav>
+       <ul>
+        <p class="bib">Biblioteca</p>
+         
+            <li class="menu">
+                <div class="barra"></div>
+                <a>CRUD<span>&rsaquo;</span></a>
+               
+                <ul>
+                    <li><a href="/">Autor</a></li>
+                    <li><a href="libro">Libro</a></li>
+                    <li><a href="edicion">Edición</a></li>
+                    <li><a href="copia">Copia</a></li>
+                    <li><a href="usuario">Usuario</a></li>
+                    <li><a href="prestamo">Préstamo</a></li>
+                </ul> 
+            </li> 
+            
+            <li class="menu">
+
+                <div class="barra"></div>
+                
+                <a>Consultas<span>&rsaquo;</span></a>
+                
+                <ul>
+                    <li><a href="consultaL">Consulta 1.</a></li>
+                    <li><a href="consultaU">Consulta 2.</a></li>
+                </ul> 
+            </li> 
+       </ul> 
+    </nav>
+    <div class="contenedor">
+        <h2>Préstamo</h2>
+        <form id="formulario" name="formulario" method="POST">
+            <div class="elemento">
+                <label for="numero">Número</label>
+                <input type="text" id="numero" name="numero" required="true"/>
+            </div>
+            <div class="elemento">
+                <label for="isbn">Isbn</label>
+                <input type="text" id="isbn" name="isbn" required="true"/>
+            </div>
+            
+            <div class="elemento">
+                <label for="rut">RUT</label>
+                <input type="text" id="rut" name="rut" required="true"/>
+            </div>
+            <div class="elemento">
+                <label for="fecha_prestamo">Fecha del Préstamo</label>
+                <input type="text" id="fecha_prestamo" name="fecha_prestamo" required="true"/>
+            </div>
+            <div class="elemento">
+                <label for="fecha_devolucion">Fecha del Devolución</label>
+                <input type="text" id="fecha_devolucion" name="fecha_devolucion" required="true"/>
+            </div>
+
+            <div class="elemento">
+                <input type="submit" value="Agregar"/>
+            </div>
+            <div class="elemento">
+                <input type="update" value="Actualizar"/>
+            </div>
+            
+        </form>
+    </div>
+    <table id="autores">
+        <tr>
+          <th>Número</th>
+          <th>Isbn</th>
+          <th>Rut</th>
+          <th>Fecha del Préstamo</th>
+          <th>Fecha del Devolución</th>
+        </tr>
+        <tr>
+         <td>4</td>
+         <td>4895385938</td>
+         <td>90909</td>
+         <td>10/04/21</td>
+         <td>29/10/21</td>
+         <td class="btn_delete">eliminar</td>
+        </tr>
+        <tr>
+        <td>2</td>
+        <td>869968859</td>
+        <td>23245</td>
+        <td>04/03/19</td>
+        <td>06/05/19</td>
+        <td class="btn_delete">eliminar</td>
+        </tr>
+    </table>
+      
+</body>
+
+</html>

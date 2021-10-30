@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ url_for('static',filename='styles/main.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='styles/stylesTables.css') }}" rel="stylesheet">
     <title>Biblioteca</title>
 </head>
 
@@ -18,7 +18,7 @@
                 <a>CRUD<span>&rsaquo;</span></a>
                
                 <ul>
-                    <li><a href="">Autor</a></li>
+                    <li><a href="/">Autor</a></li>
                     <li><a href="libro">Libro</a></li>
                     <li><a href="edicion">Edición</a></li>
                     <li><a href="copia">Copia</a></li>
@@ -41,28 +41,56 @@
        </ul> 
     </nav>
     <div class="contenedor">
-        <h2>Autor</h2>
+        <h2>Edición</h2>
         <form id="formulario" name="formulario" method="POST">
             <div class="elemento">
-                <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" required="true"/>
+                <label for="isbn">Isbn</label>
+                <input type="text" id="isbn" name="isbn" required="true"/>
             </div>
+            <div class="elemento">
+                <label for="año">Año</label>
+                <input type="text" id="año" name="año" required="true"/>
+            </div>
+            <div class="elemento">
+                <label for="idioma">Idioma</label>
+                <input type="text" id="idioma" name="idioma" required="true"/>
+            </div>
+            <div class="elemento">
+                <label for="titulo">Título</label>
+                <input type="text" id="titulo" name="titulo" required="true"/>
+            </div>
+
             <div class="elemento">
                 <input type="submit" value="Agregar"/>
             </div>
+            <div class="elemento">
+                <input type="update" value="Actualizar"/>
+            </div>
+            
         </form>
     </div>
     <table id="autores">
         <tr>
-          <th>Nombre</th>
+          <th>Isbn</th>
+          <th>Año</th>
+          <th>Idioma</th>
+          <th>Título</th>
         </tr>
-        {% for name,id in data.items() %}
         <tr>
-            <td>{{name}}</td>
-            <td class="btn_delete" href="/deleteAutor/{{id}}">eliminar</td>
+          <td>4895385938</td>
+          <td>2003</td>
+          <td>Hebreo</td>
+          <td>Ready Player One</td>
+          <td class="btn_delete">eliminar</td>
         </tr>
-        {% endfor %}
-      </table>
+        <tr>
+            <td>869968859</td>
+            <td>1951</td>
+            <td>Español</td>
+            <td>El Principito</td>
+            <td class="btn_delete">eliminar</td>
+            </tr>
+    </table>
       
 </body>
 

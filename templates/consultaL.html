@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ url_for('static',filename='styles/main.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='styles/stylesQuery.css') }}" rel="stylesheet">
     <title>Biblioteca</title>
 </head>
 
@@ -18,7 +18,7 @@
                 <a>CRUD<span>&rsaquo;</span></a>
                
                 <ul>
-                    <li><a href="">Autor</a></li>
+                    <li><a href="/">Autor</a></li>
                     <li><a href="libro">Libro</a></li>
                     <li><a href="edicion">Edición</a></li>
                     <li><a href="copia">Copia</a></li>
@@ -40,28 +40,53 @@
             </li> 
        </ul> 
     </nav>
+
     <div class="contenedor">
-        <h2>Autor</h2>
-        <form id="formulario" name="formulario" method="POST">
-            <div class="elemento">
-                <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" required="true"/>
-            </div>
-            <div class="elemento">
-                <input type="submit" value="Agregar"/>
-            </div>
-        </form>
+        <h2>Consulta 1.</h2>
     </div>
+
     <table id="autores">
         <tr>
-          <th>Nombre</th>
+          <th>Autor</th>
+          <th>Libro</th>
+          <th colspan="4">Edición</th>
+          <th colspan="2">Copia</th>
         </tr>
-        {% for name,id in data.items() %}
+       <tr >
+           <th class="atributos">Nombre</th>
+           <th class="atributos">Título</th>
+           <th class="atributos">Isbn</th>
+           <th class="atributos"> Año</th>
+           <th class="atributos">Rut</th>
+           <th class="atributos">Título</th>
+           <th class="atributos">Rut</th>
+           <th class="atributos">Nombre</th>
+
+       </tr> 
+       <tr>
+          
         <tr>
-            <td>{{name}}</td>
-            <td class="btn_delete" href="/deleteAutor/{{id}}">eliminar</td>
+          <td>Germán</td>
+          <td>Raul se la come</td>
+          <td>4895385938</td>
+          <td>2003</td>
+          <td>Hebreo</td>
+          <td>Ready Player One</td>
+          <td>4895385938</td>
+          <td>4</td>
+          <td class="btn_delete">eliminar</td>
         </tr>
-        {% endfor %}
+        <tr>
+            <td>Luisa</td>
+            <td>Cómo ser castroso en 2 simples pasos</td>
+            <td>869968859</td>
+            <td>1951</td>
+            <td>Español</td>
+            <td>El Principito</td>
+            <td>869968859</td>
+            <td>2</td>
+            <td class="btn_delete">eliminar</td>
+          </tr>
       </table>
       
 </body>

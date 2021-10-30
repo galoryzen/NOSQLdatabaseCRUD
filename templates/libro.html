@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ url_for('static',filename='styles/main.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='styles/stylesTables.css') }}" rel="stylesheet">
     <title>Biblioteca</title>
 </head>
 
@@ -18,7 +18,7 @@
                 <a>CRUD<span>&rsaquo;</span></a>
                
                 <ul>
-                    <li><a href="">Autor</a></li>
+                    <li><a href="/">Autor</a></li>
                     <li><a href="libro">Libro</a></li>
                     <li><a href="edicion">Edición</a></li>
                     <li><a href="copia">Copia</a></li>
@@ -41,11 +41,11 @@
        </ul> 
     </nav>
     <div class="contenedor">
-        <h2>Autor</h2>
+        <h2>Libro</h2>
         <form id="formulario" name="formulario" method="POST">
             <div class="elemento">
-                <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" required="true"/>
+                <label for="titulo">Título</label>
+                <input type="text" id="titulo" name="titulo" required="true"/>
             </div>
             <div class="elemento">
                 <input type="submit" value="Agregar"/>
@@ -54,14 +54,16 @@
     </div>
     <table id="autores">
         <tr>
-          <th>Nombre</th>
+          <th>Titulo</th>
         </tr>
-        {% for name,id in data.items() %}
         <tr>
-            <td>{{name}}</td>
-            <td class="btn_delete" href="/deleteAutor/{{id}}">eliminar</td>
+          <td>Ready Player One</td>
+          <td class="btn_delete">eliminar</td>
         </tr>
-        {% endfor %}
+        <tr>
+            <td>El Principito</td>
+            <td class="btn_delete">eliminar</td>
+          </tr>
       </table>
       
 </body>

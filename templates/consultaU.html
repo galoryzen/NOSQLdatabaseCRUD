@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ url_for('static',filename='styles/main.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='styles/stylesQuery.css') }}" rel="stylesheet">
     <title>Biblioteca</title>
 </head>
 
@@ -18,7 +18,7 @@
                 <a>CRUD<span>&rsaquo;</span></a>
                
                 <ul>
-                    <li><a href="">Autor</a></li>
+                    <li><a href="/">Autor</a></li>
                     <li><a href="libro">Libro</a></li>
                     <li><a href="edicion">Edición</a></li>
                     <li><a href="copia">Copia</a></li>
@@ -40,28 +40,32 @@
             </li> 
        </ul> 
     </nav>
+
     <div class="contenedor">
-        <h2>Autor</h2>
-        <form id="formulario" name="formulario" method="POST">
-            <div class="elemento">
-                <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" required="true"/>
-            </div>
-            <div class="elemento">
-                <input type="submit" value="Agregar"/>
-            </div>
-        </form>
+        <h2>Consulta 2.</h2>
     </div>
+
     <table id="autores">
         <tr>
-          <th>Nombre</th>
+          <th>Libro</th>
+          <th>Usuario</th>
         </tr>
-        {% for name,id in data.items() %}
+       <tr >
+           <th class="atributos">Título</th>
+           <th class="atributos">Nombre</th>
+       </tr> 
+       <tr>
+          
         <tr>
-            <td>{{name}}</td>
-            <td class="btn_delete" href="/deleteAutor/{{id}}">eliminar</td>
+          <td>Raul se la come</td>
+          <td>Germán</td>
+          <td class="btn_delete">eliminar</td>
         </tr>
-        {% endfor %}
+        <tr>
+            <td>Cómo ser castroso en 2 simples pasos</td>
+            <td>Luisa</td>
+            <td class="btn_delete">eliminar</td>
+          </tr>
       </table>
       
 </body>
