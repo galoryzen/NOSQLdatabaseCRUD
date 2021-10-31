@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ url_for('static',filename='styles/stylesTables.css') }}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap" rel="stylesheet">
     <title>Biblioteca</title>
 </head>
 
@@ -57,29 +60,26 @@
                 <input type="submit" value="Agregar"/>
             </div>
             <div class="elemento">
-                <input type="update" value="Actualizar"/>
+                <input type="submit" value="Actualizar"/>
             </div>
             
         </form>
     </div>
     <table id="autores">
         <tr>
+          <th>ID Oculto</th>
           <th>Rut</th>
           <th>Nombre</th>
-
         </tr>
+        {% for row in data %}
         <tr>
-          <td>45938</td>
-          <td>Raul</td>
-          <td class="btn_delete">eliminar</td>
-        </tr>
-        <tr>
-            <td>86996</td>
-            <td>Sebastian</td>
+            {% for cell in row %}
+            <td>{{cell}}</td>
+            {% endfor %}
             <td class="btn_delete">eliminar</td>
-            </tr>
+        </tr>
+        {% endfor %}
     </table>
-      
 </body>
 
 </html>

@@ -77,8 +77,9 @@ def edicion():
 def copia():
     collection = db['copia']
     results = list(collection.find())
+    data = []
     for copia in results:
-     data = data.append([copia['_id'],copia['isbn'],copia['numero']])
+        data = data.append([copia['_id'],copia['isbn'],copia['numero']])
     return render_template("copia.html", data=data)
 
 @app.route('/usuario')
@@ -87,15 +88,16 @@ def usuario():
     results = list(collection.find())
     data = []
     for result in results:
-        data.append((result['_id'], result['rut'], result['nombre']))
+        data.append((result['_id'], int(result['rut']), result['nombre']))
     return render_template("usuario.html", data=data)
 
 @app.route('/prestamo')
 def prestamo():
     collection = db['prestamo']
     results = list(collection.find())
+    data = []
     for prestamo in results:
-     data = data.append([prestamo['_id'],prestamo['isbn'],prestamo['numero'],prestamo['rut'],prestamo['fecha_prestamo'],prestamo['fecha_devolucion']])
+        data = data.append([prestamo['_id'],prestamo['isbn'],prestamo['numero'],prestamo['rut'],prestamo['fecha_prestamo'],prestamo['fecha_devolucion']])
     return render_template("prestamo.html", data=data)
 
 @app.route('/consultaL')
