@@ -23,7 +23,12 @@ def index2(id):
     results = list(collection.find())
     data = {autor['nombre']: autor['_id'] for autor in results}
     
-    nombre = list(collection.find({'_id' : ObjectId(id)}))[0]['nombre']
+    try:
+        id = ObjectId(id)
+    except:
+        return render_template("index.html", data=data, id_oculto='', nombre='')
+    
+    nombre = collection.find({'_id': id})[0]['nombre']
     
     return render_template("index.html", data=data, id_oculto=id, nombre=nombre)
 
@@ -132,8 +137,73 @@ def edicion():
     results = list(collection.find())
     data = []
     for edicion in results:
-       data.append([edicion['_id'],edicion['isbn'],edicion['año'],edicion['idioma'],edicion['titulo']])
-    return render_template("edicion.html", data=data)
+       data.append([int(edicion['isbn']),int(edicion['año']),edicion['idioma'],edicion['titulo'],edicion['_id']])
+    return render_template("edicion.html", data=data, input=['', '', '', ''])
+
+@app.route('/edicion/<id>')
+def edicion2(id):
+    
+    collection = db['edicion']
+    results = list(collection.find())
+    data = []
+    for edicion in results:
+        data.append([int(edicion['isbn']),int(edicion['año']),edicion['idioma'],edicion['titulo'],edicion['_id']])
+        
+    dic = list(collection.find({'_id': ObjectId(id)}))[0]
+    
+    return render_template("edicion.html", data=data, id_oculto=id, input=[int(dic['isbn']), int(dic['año']), dic['idioma'], dic['titulo']])
+
+@app.route('/createEdicion', methods=['POST'])
+def create_edicion():
+    collection = db['edicion']
+
+    isbn = request.form['isbn']
+    ano = request.form['año']
+    idioma = request.form['idioma']
+    titulo = request.form['titulo']
+    
+    try:
+        collection.insert_one({'isbn': int(isbn), 'año': ano, 'idioma': idioma, 'titulo': titulo})
+    except Exception:
+        print(Exception)
+    finally:
+        return redirect(url_for('edicion'))
+
+@app.route('/deleteEdicion/<id>')
+def delete_edicion(id):
+    collection = db['edicion']
+    
+    try:
+        collection.delete_one({'_id': ObjectId(id)})
+    except Exception:
+        print(Exception)
+    finally:
+        return redirect(url_for('libro'))
+
+@app.route('/updateEdicion', methods=['POST'])
+def update_edicion():
+    collection = db['edicion']
+
+    isbn = request.form['isbn']
+    ano = request.form['año']
+    idioma = request.form['idioma']
+    titulo = request.form['titulo']
+    id = request.form['id_oculto']
+    
+    dic = list(collection.find({'_id': ObjectId(id)}))[0]
+    isbn_anterior = dic['isbn']
+
+    try:
+        collection.update_one({'_id': ObjectId(id)}, {'$set': {'isbn': int(isbn), 'año': ano, 'idioma': idioma, 'titulo': titulo}})
+        collection2 = db['copia']
+        collection2.update_many({'isbn': isbn_anterior}, {'$set': {'isbn': int(isbn)}})
+        collection3 = db['prestamo']
+        collection3.update_one({'isbn': isbn_anterior}, {'$set': {'isbn': int(isbn)}})
+    except Exception:
+        print(Exception)
+    finally:
+        return redirect(url_for('edicion'))
+
 
 @app.route('/copia')
 def copia():

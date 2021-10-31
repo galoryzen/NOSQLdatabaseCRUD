@@ -49,19 +49,19 @@
         <form id="formulario" name="formulario" method="POST">
             <div class="elemento">
                 <label for="isbn">Isbn</label>
-                <input type="text" id="isbn" name="isbn" required="true"/>
+                <input type="text" id="isbn" name="isbn" value="{{input[0]}}" required="true"/>
             </div>
             <div class="elemento">
                 <label for="año">Año</label>
-                <input type="text" id="año" name="año" required="true"/>
+                <input type="text" id="año" name="año" value="{{input[1]}}" required="true"/>
             </div>
             <div class="elemento">
                 <label for="idioma">Idioma</label>
-                <input type="text" id="idioma" name="idioma" required="true"/>
+                <input type="text" id="idioma" name="idioma" value="{{input[2]}}" required="true"/>
             </div>
             <div class="elemento">
                 <label for="titulo">Título</label>
-                <input type="text" id="titulo" name="titulo" required="true"/>
+                <input type="text" id="titulo" name="titulo" value="{{input[3]}}" required="true"/>
             </div>
             <div class="elemento">
                 <label for="id_oculto">ID Oculto</label>
@@ -69,8 +69,8 @@
             </div>
             <div class="d-flex justify-content-center">
                 <div class="btn-group">
-                    <button type="submit" value="Agregar" formaction="createAutor">Agregar</button>
-                    <button type="submit" value="Actualizar" formaction="updateAutor">Actualizar</button>
+                    <button type="submit" value="Agregar" formaction="/createEdicion">Agregar</button>
+                    <button type="submit" value="Actualizar" formaction="/updateEdicion">Actualizar</button>
                 </div>
             </div>
             
@@ -78,25 +78,22 @@
     </div>
     <table id="autores">
         <tr>
-          <th>Isbn</th>
-          <th>Año</th>
-          <th>Idioma</th>
-          <th>Título</th>
+            <th>Isbn</th>
+            <th>Año</th>
+            <th>Idioma</th>
+            <th>Título</th>
+            <th>ID Oculto</th>
+            <th colspan="2">Opciones</th>
         </tr>
+        {% for row in data %}
         <tr>
-          <td>4895385938</td>
-          <td>2003</td>
-          <td>Hebreo</td>
-          <td>Ready Player One</td>
-          <td class="btn_delete">eliminar</td>
+            {% for cell in row %}
+            <td>{{cell}}</td>
+            {% endfor %}
+            <td class="btn_select"><a class ="sel"  href="/edicion/{{row[-1]}}">Select</a></td>
+            <td class="btn_delete"><a class ="del"  href="/deleteEdicion/{{row[-1]}}">eliminar</a></td>
         </tr>
-        <tr>
-            <td>869968859</td>
-            <td>1951</td>
-            <td>Español</td>
-            <td>El Principito</td>
-            <td class="btn_delete">eliminar</td>
-            </tr>
+        {% endfor %}
     </table>
       
 </body>
