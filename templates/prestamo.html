@@ -7,6 +7,7 @@
     <link href="{{ url_for('static',filename='styles/stylesTables.css') }}" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap" rel="stylesheet">
     <title>Biblioteca</title>
 </head>
@@ -67,12 +68,15 @@
                 <label for="fecha_devolucion">Fecha del Devolución</label>
                 <input type="text" id="fecha_devolucion" name="fecha_devolucion" required="true"/>
             </div>
-
             <div class="elemento">
-                <input type="submit" value="Agregar"/>
+                <label for="id_oculto">ID Oculto</label>
+                <input type="text" id="id_oculto" name="id_oculto" value="{{id_oculto}}" readonly/>
             </div>
-            <div class="elemento">
-                <input type="update" value="Actualizar"/>
+            <div class="d-flex justify-content-center">
+                <div class="btn-group">
+                    <button type="submit" value="Agregar" formaction="createAutor">Agregar</button>
+                    <button type="submit" value="Actualizar" formaction="updateAutor">Actualizar</button>
+                </div>
             </div>
             
         </form>
