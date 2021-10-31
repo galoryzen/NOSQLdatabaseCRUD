@@ -2,8 +2,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: helvetica Neue;
     font-weight: lighter;
+    font-family: 'Poppins', sans-serif;
   }
   
   html, body {
@@ -18,15 +18,17 @@
     height: 100%;
     background-color: #000814;
     box-shadow: 5px 7px 10px rgb(0,0,0,.5);
+    font-weight: lighter;
   }
   
   p.bib{
     position: relative;
     text-align: center;
-    font-size: 48px;
+    font-size: 36px;
     padding: 16px;
     padding-right: 25px;
     color: #F7F6F3;
+    font-weight: bold;
   }
   
   nav ul{
@@ -45,8 +47,6 @@
     padding: 10px 30px;
     height: 50px;
     transition: .5s ease;
-    
-  
   }
   
   nav ul li a:hover {
@@ -78,7 +78,6 @@
     background: #FFC300;
     border-radius: 5px;
     box-shadow: 2px 2px 10px rgba(0,0,0,.1);
-    
   }
   
   nav ul span {
@@ -116,14 +115,12 @@
     font-size: 30px;
     color: #003566;
     text-align: center;
-    font-family: 'Varela Round', sans-serif;
     font-weight: bold;
   }
   
   .contenedor .elemento label{
     color: #003566;
     font-size: 24px;
-    font-family: 'Roboto Condensed', sans-serif;
   }
   
   .contenedor .elemento input{
@@ -134,7 +131,6 @@
     border: none;
     border-bottom: 1px solid #FFC300;
     margin-bottom: 30px;
-    font-family: 'Roboto Condensed', sans-serif;
     font-size: 18px;
   }
   
@@ -153,27 +149,9 @@
     margin-top: 30px;
     font-weight: bold;
   }
-
-  .contenedor .elemento input[type="update"]{
-    display: block;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #3ee082;
-    border: none;
-    border-radius: 5px;
-    width: 15%;
-    letter-spacing: 2px;
-    cursor: pointer;
-    padding: 10px;
-    text-transform: uppercase;
-    margin-top: 30px;
-    font-weight: bold;
-  }
   
   /*Tabla*/
   #autores {
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 18px;
     border-collapse: collapse;
     margin: 0px 355px auto;

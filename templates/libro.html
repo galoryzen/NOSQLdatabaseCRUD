@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ url_for('static',filename='styles/stylesTables.css') }}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap" rel="stylesheet">
     <title>Biblioteca</title>
 </head>
 
@@ -46,6 +49,10 @@
             <div class="elemento">
                 <label for="titulo">Título</label>
                 <input type="text" id="titulo" name="titulo" required="true"/>
+            </div>
+            <div class="elemento">
+                <label for="id_oculto">ID Oculto</label>
+                <input type="text" id="id_oculto" name="id_oculto" readonly/>
             </div>
             <div class="elemento">
                 <input type="submit" value="Agregar"/>
