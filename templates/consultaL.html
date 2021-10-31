@@ -52,44 +52,24 @@
         <tr>
           <th>Autor</th>
           <th>Libro</th>
-          <th colspan="4">Edición</th>
-          <th colspan="2">Copia</th>
+          <th colspan="3">Edición</th>
+          <th>Copia</th>
         </tr>
        <tr >
            <th class="atributos">Nombre</th>
            <th class="atributos">Título</th>
            <th class="atributos">Isbn</th>
-           <th class="atributos"> Año</th>
+           <th class="atributos">Año</th>
            <th class="atributos">Rut</th>
-           <th class="atributos">Título</th>
-           <th class="atributos">Rut</th>
-           <th class="atributos">Nombre</th>
-
+           <th class="atributos">Numero</th>
        </tr> 
-       <tr>
-          
+       {% for row in data %}
         <tr>
-          <td>Germán</td>
-          <td>Raul se la come</td>
-          <td>4895385938</td>
-          <td>2003</td>
-          <td>Hebreo</td>
-          <td>Ready Player One</td>
-          <td>4895385938</td>
-          <td>4</td>
-          <td class="btn_delete">eliminar</td>
+            {% for cell in row %}
+            <td>{{cell}}</td>
+            {% endfor %}
         </tr>
-        <tr>
-            <td>Luisa</td>
-            <td>Cómo ser castroso en 2 simples pasos</td>
-            <td>869968859</td>
-            <td>1951</td>
-            <td>Español</td>
-            <td>El Principito</td>
-            <td>869968859</td>
-            <td>2</td>
-            <td class="btn_delete">eliminar</td>
-          </tr>
+        {% endfor %}
       </table>
       
 </body>

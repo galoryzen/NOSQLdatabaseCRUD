@@ -22,11 +22,11 @@
                
                 <ul>
                     <li><a href="/">Autor</a></li>
-                    <li><a href="libro">Libro</a></li>
-                    <li><a href="edicion">Edición</a></li>
-                    <li><a href="copia">Copia</a></li>
-                    <li><a href="usuario">Usuario</a></li>
-                    <li><a href="prestamo">Préstamo</a></li>
+                    <li><a href="/libro">Libro</a></li>
+                    <li><a href="/edicion">Edición</a></li>
+                    <li><a href="/copia">Copia</a></li>
+                    <li><a href="/usuario">Usuario</a></li>
+                    <li><a href="/prestamo">Préstamo</a></li>
                 </ul> 
             </li> 
             
@@ -58,17 +58,12 @@
            <th class="atributos">Nombre</th>
        </tr> 
        <tr>
-          
-        <tr>
-          <td>Raul se la come</td>
-          <td>Germán</td>
-          <td class="btn_delete">eliminar</td>
+        {% for usuario, libros in data.items() %}
+        <td>{{usuario}}</td>
+        <td>{{libros}}</td>
         </tr>
-        <tr>
-            <td>Cómo ser castroso en 2 simples pasos</td>
-            <td>Luisa</td>
-            <td class="btn_delete">eliminar</td>
-          </tr>
+        {% endfor %}
+       
       </table>
       
 </body>

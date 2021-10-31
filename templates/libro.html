@@ -22,11 +22,11 @@
                
                 <ul>
                     <li><a href="/">Autor</a></li>
-                    <li><a href="libro">Libro</a></li>
-                    <li><a href="edicion">Edición</a></li>
-                    <li><a href="copia">Copia</a></li>
-                    <li><a href="usuario">Usuario</a></li>
-                    <li><a href="prestamo">Préstamo</a></li>
+                    <li><a href="/libro">Libro</a></li>
+                    <li><a href="/edicion">Edición</a></li>
+                    <li><a href="/copia">Copia</a></li>
+                    <li><a href="/usuario">Usuario</a></li>
+                    <li><a href="/prestamo">Préstamo</a></li>
                 </ul> 
             </li> 
             
@@ -37,8 +37,8 @@
                 <a>Consultas<span>&rsaquo;</span></a>
                 
                 <ul>
-                    <li><a href="consultaL">Consulta 1.</a></li>
-                    <li><a href="consultaU">Consulta 2.</a></li>
+                    <li><a href="/consultaL">Consulta 1.</a></li>
+                    <li><a href="/consultaU">Consulta 2.</a></li>
                 </ul> 
             </li> 
        </ul> 
@@ -48,14 +48,17 @@
         <form id="formulario" name="formulario" method="POST">
             <div class="elemento">
                 <label for="titulo">Título</label>
-                <input type="text" id="titulo" name="titulo" required="true"/>
+                <input type="text" id="titulo" name="titulo" value="{{nombre}}"required="true"/>
             </div>
             <div class="elemento">
                 <label for="id_oculto">ID Oculto</label>
-                <input type="text" id="id_oculto" name="id_oculto" readonly/>
+                <input type="text" id="id_oculto" name="id_oculto" value="{{id_oculto}}" readonly/>
             </div>
             <div class="elemento">
-                <input type="submit" value="Agregar"/>
+                <input type="submit" value="Agregar" formaction="/createLibro"/>
+            </div>
+            <div class="elemento">
+                <input type="submit" value="Actualizar" formaction="http://localhost:5000/updateLibro"/>
             </div>
         </form>
     </div>
@@ -66,9 +69,10 @@
         </tr>
         {% for name,id in data.items() %}
         <tr>
-          <td>{{name}}</td>
+            <td>{{name}}</td>
             <td><{{id}}</td>
-            <td class="btn_delete"><a href="/deleteAutor/{{id}}">eliminar</a></td>
+            <td class="btn_select"><a href="/libro/{{id}}">Select</a></td>
+            <td class="btn_delete"><a href="/deleteLibro/{{id}}">eliminar</a></td>
         </tr>
         {% endfor %}
     </table>

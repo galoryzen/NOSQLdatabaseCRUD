@@ -48,14 +48,17 @@
         <form id="formulario" name="formulario" method="POST">
             <div class="elemento">
                 <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" required="true"/>
+                <input type="text" id="nombre" name="nombre" value="{{nombre}}" required="true"/>
             </div>
             <div class="elemento">
                 <label for="id_oculto">ID Oculto</label>
-                <input type="text" id="id_oculto" name="id_oculto" readonly/>
+                <input type="text" id="id_oculto" name="id_oculto" value="{{id_oculto}}" readonly/>
             </div>
             <div class="elemento">
                 <input type="submit" value="Agregar" formaction="createAutor"/>
+            </div>
+            <div class="elemento">
+                <input type="submit" value="Actualizar" formaction="updateAutor"/>
             </div>
         </form>
     </div>
@@ -68,6 +71,7 @@
         <tr>
             <td>{{name}}</td>
             <td><{{id}}</td>
+            <td class="btn_select"><a href="/{{id}}">Select</a></td>
             <td class="btn_delete"><a href="/deleteAutor/{{id}}">eliminar</a></td>
         </tr>
         {% endfor %}
