@@ -7,6 +7,7 @@
     <link href="{{ url_for('static',filename='styles/main.css') }}" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap" rel="stylesheet">
     <title>Biblioteca</title>
 </head>
@@ -54,25 +55,26 @@
                 <label for="id_oculto">ID Oculto</label>
                 <input type="text" id="id_oculto" name="id_oculto" value="{{id_oculto}}" readonly/>
             </div>
-            <div class="elemento">
-                <input type="submit" value="Agregar" formaction="createAutor"/>
-            </div>
-            <div class="elemento">
-                <input type="submit" value="Actualizar" formaction="updateAutor"/>
+            <div class="d-flex justify-content-center">
+                <div class="btn-group">
+                    <button type="submit" value="Agregar" formaction="createAutor">Agregar</button>
+                    <button type="submit" value="Actualizar" formaction="updateAutor">Actualizar</button>
+                </div>
             </div>
         </form>
     </div>
     <table id="autores">
         <tr>
           <th>Nombre</th>
-          <th>id oculto</th>
+          <th>ID Oculto</th>
+          <th colspan="2">Opciones</th>
         </tr>
         {% for name,id in data.items() %}
         <tr>
             <td>{{name}}</td>
             <td><{{id}}</td>
-            <td class="btn_select"><a href="/{{id}}">Select</a></td>
-            <td class="btn_delete"><a href="/deleteAutor/{{id}}">eliminar</a></td>
+            <td class="btn_select"><a class ="sel" href="/{{id}}">Select</a></td>
+            <td class="btn_delete"><a class ="del" href="/deleteAutor/{{id}}">eliminar</a></td>
         </tr>
         {% endfor %}
       </table>
