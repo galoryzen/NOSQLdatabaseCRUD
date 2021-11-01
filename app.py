@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 from flask import Flask, render_template, request, redirect, url_for, flash
 from bson.objectid import ObjectId
-from datetime import date
+from datetime import date, datetime
 
 app = Flask(__name__)
 
@@ -44,8 +44,8 @@ def create_autor():
     nombre_autor = request.form['nombre']
     try:
         collection.insert_one({"nombre": nombre_autor})
-    except Exception:
-        print(Exception)
+    except Exception as e:
+        print(e)
     finally:
         return redirect(url_for('index'))
     
@@ -56,8 +56,8 @@ def delete_autor(id):
     
     try:
         collection.delete_one({'_id': ObjectId(id)})
-    except Exception:
-        print(Exception)
+    except Exception as e:
+        print(e)
     finally:
         return redirect(url_for('index'))
     
@@ -73,8 +73,8 @@ def update_autor():
         collection.update_one({'_id': ObjectId(id_autor)}, {'$set': {'nombre': nombre_autor_nuevo}})
         collection2 = db['autorea']
         collection2.update_many({'nombre': nombre_autor_viejo}, {'$set': {'nombre': nombre_autor_nuevo}})
-    except Exception:
-        print(Exception)
+    except Exception as e:
+        print(e)
     finally:
         return redirect(url_for('index'))
 
@@ -101,8 +101,8 @@ def create_libro():
     nombre_libro = request.form['titulo']
     try:
         collection.insert_one({"titulo": nombre_libro})
-    except Exception:
-        print(Exception)
+    except Exception as e:
+        print(e)
     finally:
         return redirect(url_for('libro'))
 
@@ -112,8 +112,8 @@ def delete_libro(id):
     
     try:
         collection.delete_one({'_id': ObjectId(id)})
-    except Exception:
-        print(Exception)
+    except Exception as e:
+        print(e)
     finally:
         return redirect(url_for('libro'))
 
@@ -131,8 +131,8 @@ def update_libro():
         collection2.update_many({'titulo': titulo_libro_viejo}, {'$set': {'titulo': titulo_libro_nuevo}})
         collection3 = db['edicion']
         collection3.update_one({'titulo': titulo_libro_viejo}, {'$set': {'titulo': titulo_libro_nuevo}})
-    except Exception:
-        print(Exception)
+    except Exception as e:
+        print(e)
     finally:
         return redirect(url_for('libro'))
 
@@ -169,8 +169,8 @@ def create_edicion():
     
     try:
         collection.insert_one({'isbn': int(isbn), 'año': ano, 'idioma': idioma, 'titulo': titulo})
-    except Exception:
-        print(Exception)
+    except Exception as e:
+        print(e)
     finally:
         return redirect(url_for('edicion'))
 
@@ -180,8 +180,8 @@ def delete_edicion(id):
     
     try:
         collection.delete_one({'_id': ObjectId(id)})
-    except Exception:
-        print(Exception)
+    except Exception as e:
+        print(e)
     finally:
         return redirect(url_for('edicion'))
 
@@ -204,8 +204,8 @@ def update_edicion():
         collection2.update_many({'isbn': isbn_anterior}, {'$set': {'isbn': int(isbn)}})
         collection3 = db['prestamo']
         collection3.update_one({'isbn': isbn_anterior}, {'$set': {'isbn': int(isbn)}})
-    except Exception:
-        print(Exception)
+    except Exception as e:
+        print(e)
     finally:
         return redirect(url_for('edicion'))
 
@@ -242,8 +242,8 @@ def create_copia():
     
     try:
         collection.insert_one({'isbn': int(isbn), 'numero': int(numero)})
-    except Exception:
-        print(Exception)
+    except Exception as e:
+        print(e)
     finally:
         return redirect(url_for('copia'))
 
@@ -253,8 +253,8 @@ def delete_copia(id):
     
     try:
         collection.delete_one({'_id': ObjectId(id)})
-    except Exception:
-        print(Exception)
+    except Exception as e:
+        print(e)
     finally:
         return redirect(url_for('copia'))
 
@@ -274,8 +274,8 @@ def update_copia():
         collection.update_one({'_id': ObjectId(id)}, {'$set': {'isbn': int(isbn), 'numero': numero}})
         collection = db['prestamo']
         collection.update_many({'isbn': isbn_anterior, 'numero':numero_anterior}, {'$set': {'isbn': int(isbn), 'numero':numero}})
-    except Exception:
-        print(Exception)
+    except Exception as e:
+        print(e)
     finally:
         return redirect(url_for('copia'))
 
@@ -286,8 +286,67 @@ def usuario():
     results = list(collection.find())
     data = []
     for result in results:
-        data.append((result['_id'], int(result['rut']), result['nombre']))
-    return render_template("usuario.html", data=data)
+        data.append([result['_id'], int(result['rut']), result['nombre']])
+    return render_template("usuario.html", data=data, rut='', nombre='', id_oculto='')
+
+
+@app.route('/usuario/<id>')
+def usuario2(id):
+    
+    collection = db['usuario']
+    results = list(collection.find())
+    data = []
+    for result in results:
+        data.append([result['_id'], int(result['rut']), result['nombre']])
+    
+    dic = list(collection.find({'_id': ObjectId(id)}))[0]
+    
+    return render_template("usuario.html", data=data, rut=dic['rut'], nombre=dic['nombre'], id_oculto=id)
+
+@app.route('/createUsuario', methods=['POST'])
+def create_usuario():
+    collection = db['usuario']
+
+    rut = request.form['rut']
+    nombre = request.form['nombre']
+    
+    try:
+        collection.insert_one({'rut': int(rut), 'nombre': nombre})
+    except Exception as e:
+        print(e)
+    finally:
+        return redirect(url_for('usuario'))
+
+@app.route('/deleteUsuario/<id>')
+def delete_usuario(id):
+    collection = db['usuario']
+    
+    try:
+        collection.delete_one({'_id': ObjectId(id)})
+    except Exception as e:
+        print(e)
+    finally:
+        return redirect(url_for('usuario'))
+
+@app.route('/updateUsuario', methods=['POST'])
+def update_usuario():
+    collection = db['usuario']
+
+    rut = request.form['rut']
+    nombre = request.form['nombre']
+    id = request.form['id_oculto']
+    
+    dic = list(collection.find({'_id': ObjectId(id)}))[0]
+    rut_anterior = dic['rut']
+
+    try:
+        collection.update_one({'_id': ObjectId(id)}, {'$set': {'rut': int(rut), 'nombre': nombre}})
+        collection = db['prestamo']
+        collection.update_many({'rut': rut_anterior}, {'$set': {'rut': int(rut)}})
+    except Exception as e:
+        print(e)
+    finally:
+        return redirect(url_for('usuario'))
 
 @app.route('/prestamo')
 def prestamo():
@@ -295,8 +354,67 @@ def prestamo():
     results = list(collection.find())
     data = []
     for prestamo in results:
-        data.append([prestamo['_id'],prestamo['isbn'],prestamo['numero'],prestamo['rut'],prestamo['fecha_prestamo'],prestamo['fecha_devolucion']])
-    return render_template("prestamo.html", data=data)
+        data.append([prestamo['_id'],prestamo['numero'],int(prestamo['isbn']),prestamo['rut'],prestamo['fecha_prestamo'],prestamo['fecha_devolucion']])
+    return render_template("prestamo.html", data=data, input=['', '', '', 'Ej: 2021-05-14', 'Ej: 2021-11-24'])
+
+@app.route('/prestamo/<id>')
+def prestamo2(id):
+    
+    collection = db['prestamo']
+    results = list(collection.find())
+    data = []
+    for prestamo in results:
+        data.append([prestamo['_id'],prestamo['numero'],int(prestamo['isbn']),prestamo['rut'],prestamo['fecha_prestamo'],prestamo['fecha_devolucion']])
+    
+    dic = list(collection.find({'_id': ObjectId(id)}))[0]
+    
+    return render_template("prestamo.html", data=data, input=[dic['numero'], dic['isbn'], dic['rut'], dic['fecha_prestamo'].date(), dic['fecha_devolucion'].date()], id_oculto=id)
+
+@app.route('/createPrestamo', methods=['POST'])
+def create_prestamo():
+    collection = db['prestamo']
+
+    numero = request.form['numero']
+    isbn = request.form['isbn']
+    rut = request.form['rut']
+    fp = [int(part) for part in request.form['fecha_prestamo'].split('-')]
+    fd = [int(part) for part in request.form['fecha_devolucion'].split('-')]
+    
+    try:
+        collection.insert_one({'numero': int(numero), 'isbn': int(isbn), 'rut': int(rut), 'fecha_prestamo': datetime(fp[0], fp[1], fp[2], 5, 0), 'fecha_devolucion': datetime(fd[0], fd[1], fd[2], 5, 0)})
+    except Exception as e:
+        print(e)
+    finally:
+        return redirect(url_for('prestamo'))
+    
+@app.route('/deletePrestamo/<id>')
+def delete_prestamo(id):
+    collection = db['prestamo']
+    
+    try:
+        collection.delete_one({'_id': ObjectId(id)})
+    except Exception as e:
+        print(e)
+    finally:
+        return redirect(url_for('prestamo'))
+    
+@app.route('/updatePrestamo', methods=['POST'])
+def update_prestamo():
+    collection = db['prestamo']
+
+    numero = request.form['numero']
+    isbn = request.form['isbn']
+    rut = request.form['rut']
+    fp = [int(part) for part in request.form['fecha_prestamo'].split('-')]
+    fd = [int(part) for part in request.form['fecha_devolucion'].split('-')]
+    id = request.form['id_oculto']
+
+    try:
+        collection.update_one({'_id': ObjectId(id)}, {'$set': {'numero': int(numero), 'isbn': int(isbn), 'rut': int(rut), 'fecha_prestamo': datetime(fp[0], fp[1], fp[2], 5, 0), 'fecha_devolucion': datetime(fd[0], fd[1], fd[2], 5, 0)}})
+    except Exception as e:
+        print(e)
+    finally:
+        return redirect(url_for('prestamo'))
 
 @app.route('/consultaL')
 def consultaL():

@@ -49,24 +49,24 @@
         <form id="formulario" name="formulario" method="POST">
             <div class="elemento">
                 <label for="numero">Número</label>
-                <input type="text" id="numero" name="numero" required="true"/>
+                <input type="text" id="numero" value="{{input[0]}}" name="numero" required="true"/>
             </div>
             <div class="elemento">
                 <label for="isbn">Isbn</label>
-                <input type="text" id="isbn" name="isbn" required="true"/>
+                <input type="text" id="isbn" value="{{input[1]}}" name="isbn" required="true"/>
             </div>
             
             <div class="elemento">
                 <label for="rut">RUT</label>
-                <input type="text" id="rut" name="rut" required="true"/>
+                <input type="text" id="rut" value="{{input[2]}}" name="rut" required="true"/>
             </div>
             <div class="elemento">
                 <label for="fecha_prestamo">Fecha del Préstamo</label>
-                <input type="text" id="fecha_prestamo" name="fecha_prestamo" required="true"/>
+                <input type="text" id="fecha_prestamo" value="{{input[3]}}" name="fecha_prestamo" required="true"/>
             </div>
             <div class="elemento">
                 <label for="fecha_devolucion">Fecha del Devolución</label>
-                <input type="text" id="fecha_devolucion" name="fecha_devolucion" required="true"/>
+                <input type="text" id="fecha_devolucion" value="{{input[4]}}" name="fecha_devolucion" required="true"/>
             </div>
             <div class="elemento">
                 <label for="id_oculto">ID Oculto</label>
@@ -74,8 +74,8 @@
             </div>
             <div class="d-flex justify-content-center">
                 <div class="btn-group">
-                    <button type="submit" value="Agregar" formaction="createAutor">Agregar</button>
-                    <button type="submit" value="Actualizar" formaction="updateAutor">Actualizar</button>
+                    <button type="submit" value="Agregar" formaction="/createPrestamo">Agregar</button>
+                    <button type="submit" value="Actualizar" formaction="/updatePrestamo">Actualizar</button>
                 </div>
             </div>
             
@@ -83,28 +83,23 @@
     </div>
     <table id="autores">
         <tr>
-          <th>Número</th>
-          <th>Isbn</th>
-          <th>Rut</th>
-          <th>Fecha del Préstamo</th>
-          <th>Fecha del Devolución</th>
+            <th>ID Oculto</th>
+            <th>Número</th>
+            <th>Isbn</th>
+            <th>Rut</th>
+            <th>Fecha del Préstamo</th>
+            <th>Fecha del Devolución</th>
+            <th colspan="2">Opciones</th>
         </tr>
+        {% for row in data %}
         <tr>
-         <td>4</td>
-         <td>4895385938</td>
-         <td>90909</td>
-         <td>10/04/21</td>
-         <td>29/10/21</td>
-         <td class="btn_delete">eliminar</td>
+            {% for cell in row %}
+            <td>{{cell}}</td>
+            {% endfor %}
+            <td class="btn_select"><a class ="sel"  href="/prestamo/{{row[0]}}">Select</a></td>
+            <td class="btn_delete"><a class ="del"  href="/deletePrestamo/{{row[0]}}">eliminar</a></td>
         </tr>
-        <tr>
-        <td>2</td>
-        <td>869968859</td>
-        <td>23245</td>
-        <td>04/03/19</td>
-        <td>06/05/19</td>
-        <td class="btn_delete">eliminar</td>
-        </tr>
+        {% endfor %}
     </table>
       
 </body>

@@ -49,11 +49,11 @@
         <form id="formulario" name="formulario" method="POST">
             <div class="elemento">
                 <label for="rut">Rut</label>
-                <input type="text" id="rut" name="rut" required="true"/>
+                <input type="text" id="rut" value="{{rut}}" name="rut" required="true"/>
             </div>
             <div class="elemento">
                 <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" required="true"/>
+                <input type="text" id="nombre" name="nombre" value="{{nombre}}" required="true"/>
             </div>
             <div class="elemento">
                 <label for="id_oculto">ID Oculto</label>
@@ -61,8 +61,8 @@
             </div>
             <div class="d-flex justify-content-center">
                 <div class="btn-group">
-                    <button type="submit" value="Agregar" formaction="createAutor">Agregar</button>
-                    <button type="submit" value="Actualizar" formaction="updateAutor">Actualizar</button>
+                    <button type="submit" value="Agregar" formaction="/createUsuario">Agregar</button>
+                    <button type="submit" value="Actualizar" formaction="/updateUsuario">Actualizar</button>
                 </div>
             </div>
             
@@ -73,13 +73,15 @@
           <th>ID Oculto</th>
           <th>Rut</th>
           <th>Nombre</th>
+          <th colspan="2">Opciones</th>
         </tr>
         {% for row in data %}
         <tr>
             {% for cell in row %}
             <td>{{cell}}</td>
             {% endfor %}
-            <td class="btn_delete">eliminar</td>
+            <td class="btn_select"><a class ="sel"  href="/usuario/{{row[0]}}">Select</a></td>
+            <td class="btn_delete"><a class ="del"  href="/deleteUsuario/{{row[0]}}">eliminar</a></td>
         </tr>
         {% endfor %}
     </table>
