@@ -172,7 +172,8 @@ nav ul .menu:hover ul {
   width: 15%;
   letter-spacing: 2px;
   cursor: pointer;
-  padding: 10px;
+  padding: 0px;
+  padding-bottom: 5px;
   text-transform: capitalize;
   color: white;
   font-size: 18px;
@@ -186,7 +187,8 @@ nav ul .menu:hover ul {
   width: 15%;
   letter-spacing: 2px;
   cursor: pointer;
-  padding: 10px;
+  padding: 0px;
+  padding-bottom: 5px;
   text-transform: capitalize;
   color: white;
   font-size: 18px;
@@ -207,12 +209,18 @@ nav ul .menu:hover ul {
   font-weight: bold;
   text-decoration: none;
   color: #003566;
+  display: block;
+  height: 60px;
+  width: 200px;
 }
 
 #autores a.del{
   font-weight: bold;
   text-decoration: none;
   color: white;
+  display: block;
+  height: 60px;
+  width: 200px;
 }
 
 .btn-group button {

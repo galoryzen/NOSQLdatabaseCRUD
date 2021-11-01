@@ -96,8 +96,8 @@
             {% for cell in row %}
             <td>{{cell}}</td>
             {% endfor %}
-            <td class="btn_select"><a class ="sel"  href="/prestamo/{{row[0]}}">Select</a></td>
-            <td class="btn_delete"><a class ="del"  href="/deletePrestamo/{{row[0]}}">eliminar</a></td>
+            <td class="btn_select"><a class ="sel"  href="/prestamo/{{row[0]}}"><br>seleccionar</a></td>
+            <td class="btn_delete"><a class ="del"  href="/deletePrestamo/{{row[0]}}"><br>eliminar</a></td>
         </tr>
         {% endfor %}
     </table>

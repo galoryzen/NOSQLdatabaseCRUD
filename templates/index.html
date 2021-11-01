@@ -72,9 +72,10 @@
         {% for name,id in data.items() %}
         <tr>
             <td>{{name}}</td>
-            <td><{{id}}</td>
-            <td class="btn_select"><a class ="sel" href="/autor/{{id}}">Select</a></td>
-            <td class="btn_delete"><a class ="del" href="/deleteAutor/{{id}}">eliminar</a></td>
+            <td>{{id}}</td>
+            <td class="btn_select"><a class ="sel" href="/autor/{{id}}"><br>seleccionar</a></td>
+            <td class="btn_delete"><a class ="del" href="/deleteAutor/{{id}}"><br>eliminar</a></td>
+
         </tr>
         {% endfor %}
       </table>
