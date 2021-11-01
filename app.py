@@ -1,6 +1,8 @@
 from pymongo import MongoClient
 from flask import Flask, render_template, request, redirect, url_for, flash
 from bson.objectid import ObjectId
+from datetime import date
+
 app = Flask(__name__)
 
 
@@ -8,15 +10,18 @@ MONGO_URI = 'mongodb://localhost'
 client = MongoClient(MONGO_URI)
 db = client['biblioteca']
 
-
 @app.route('/')
+def init():
+    return redirect(url_for('index'))
+
+@app.route('/autor')
 def index():
     collection = db['autor']
     results = list(collection.find())
     data = {autor['nombre']: autor['_id'] for autor in results}
     return render_template("index.html", data=data, id_oculto="", nombre="")
 
-@app.route('/<id>')
+@app.route('/autor/<id>')
 def index2(id):
     
     collection = db['autor']
@@ -178,7 +183,7 @@ def delete_edicion(id):
     except Exception:
         print(Exception)
     finally:
-        return redirect(url_for('libro'))
+        return redirect(url_for('edicion'))
 
 @app.route('/updateEdicion', methods=['POST'])
 def update_edicion():
@@ -211,8 +216,69 @@ def copia():
     results = list(collection.find())
     data = []
     for copia in results:
-        data.append([copia['_id'],copia['isbn'],copia['numero']])
-    return render_template("copia.html", data=data)
+        data.append([int(copia['isbn']),copia['numero'],copia['_id']])
+    return render_template("copia.html", data=data, numero='', isbn='', id_oculto='')
+
+
+@app.route('/copia/<id>')
+def copia2(id):
+    
+    collection = db['copia']
+    results = list(collection.find())
+    data = []
+    for copia in results:
+        data.append([int(copia['isbn']),copia['numero'],copia['_id']])
+    
+    dic = list(collection.find({'_id': ObjectId(id)}))[0]
+    
+    return render_template("copia.html", data=data, numero=dic['numero'], isbn=int(dic['isbn']), id_oculto=id)
+
+@app.route('/createCopia', methods=['POST'])
+def create_copia():
+    collection = db['copia']
+
+    isbn = request.form['isbn']
+    numero = request.form['numero']
+    
+    try:
+        collection.insert_one({'isbn': int(isbn), 'numero': int(numero)})
+    except Exception:
+        print(Exception)
+    finally:
+        return redirect(url_for('copia'))
+
+@app.route('/deleteCopia/<id>')
+def delete_copia(id):
+    collection = db['copia']
+    
+    try:
+        collection.delete_one({'_id': ObjectId(id)})
+    except Exception:
+        print(Exception)
+    finally:
+        return redirect(url_for('copia'))
+
+@app.route('/updateCopia', methods=['POST'])
+def update_copia():
+    collection = db['copia']
+
+    isbn = request.form['isbn']
+    numero = request.form['numero']
+    id = request.form['id_oculto']
+    
+    dic = list(collection.find({'_id': ObjectId(id)}))[0]
+    isbn_anterior = dic['isbn']
+    numero_anterior = dic['numero']
+
+    try:
+        collection.update_one({'_id': ObjectId(id)}, {'$set': {'isbn': int(isbn), 'numero': numero}})
+        collection = db['prestamo']
+        collection.update_many({'isbn': isbn_anterior, 'numero':numero_anterior}, {'$set': {'isbn': int(isbn), 'numero':numero}})
+    except Exception:
+        print(Exception)
+    finally:
+        return redirect(url_for('copia'))
+
 
 @app.route('/usuario')
 def usuario():
@@ -292,7 +358,5 @@ def consultaU():
         s[nombre] = ', '.join([libro for libro in libros])
     
     return render_template("consultaU.html", data=s)
-
-
 
 

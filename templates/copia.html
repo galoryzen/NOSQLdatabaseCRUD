@@ -49,11 +49,11 @@
         <form id="formulario" name="formulario" method="POST">
             <div class="elemento">
                 <label for="isbn">Isbn</label>
-                <input type="text" id="isbn" name="isbn" required="true"/>
+                <input type="text" id="isbn" name="isbn"  value="{{isbn}}" required="true"/>
             </div>
             <div class="elemento">
                 <label for="numero">Número</label>
-                <input type="text" id="numero" name="numero" required="true"/>
+                <input type="text" id="numero" name="numero" value="{{numero}}" required="true"/>
             </div>
             <div class="elemento">
                 <label for="id_oculto">ID Oculto</label>
@@ -61,8 +61,8 @@
             </div>
             <div class="d-flex justify-content-center">
                 <div class="btn-group">
-                    <button type="submit" value="Agregar" formaction="createAutor">Agregar</button>
-                    <button type="submit" value="Actualizar" formaction="updateAutor">Actualizar</button>
+                    <button type="submit" value="Agregar" formaction="/createCopia">Agregar</button>
+                    <button type="submit" value="Actualizar" formaction="/updateCopia">Actualizar</button>
                 </div>
             </div>
             
@@ -70,20 +70,20 @@
     </div>
     <table id="autores">
         <tr>
-          <th>Isbn</th>
-          <th>Número</th>
-
+            <th>Isbn</th>
+            <th>Número</th>
+            <th>ID Oculto</th>
+            <th colspan="2">Opciones</th>
         </tr>
+        {% for row in data %}
         <tr>
-          <td>4895385938</td>
-          <td>4</td>
-          <td class="btn_delete">eliminar</td>
+            {% for cell in row %}
+            <td>{{cell}}</td>
+            {% endfor %}
+            <td class="btn_select"><a class ="sel"  href="/copia/{{row[-1]}}">Select</a></td>
+            <td class="btn_delete"><a class ="del"  href="/deleteCopia/{{row[-1]}}">eliminar</a></td>
         </tr>
-        <tr>
-            <td>869968859</td>
-            <td>2</td>
-            <td class="btn_delete">eliminar</td>
-            </tr>
+        {% endfor %}
     </table>
       
 </body>
