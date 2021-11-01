@@ -80,8 +80,8 @@
             {% for cell in row %}
             <td>{{cell}}</td>
             {% endfor %}
-            <td class="btn_select"><a class ="sel"  href="/copia/{{row[-1]}}">Select</a></td>
-            <td class="btn_delete"><a class ="del"  href="/deleteCopia/{{row[-1]}}">eliminar</a></td>
+            <td class="btn_select"><a class ="sel"  href="/copia/{{row[-1]}}"><br>Seleccionar</a></td>
+            <td class="btn_delete"><a class ="del"  href="/deleteCopia/{{row[-1]}}"><br>eliminar</a></td>
         </tr>
         {% endfor %}
     </table>
