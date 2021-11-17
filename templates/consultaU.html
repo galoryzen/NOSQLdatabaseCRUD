@@ -45,17 +45,17 @@
     </nav>
 
     <div class="contenedor">
-        <h2>Consulta 2.</h2>
+        <h2>Consulta 2. Listado de los libros prestados por un usuario</h2>
     </div>
 
     <table id="autores">
         <tr>
-          <th>Libro</th>
           <th>Usuario</th>
+          <th>Libro(s)</th>
         </tr>
        <tr >
-           <th class="atributos">Título</th>
            <th class="atributos">Nombre</th>
+           <th class="atributos">Título</th>
        </tr> 
        <tr>
         {% for usuario, libros in data.items() %}
